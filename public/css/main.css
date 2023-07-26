@@ -1,0 +1,36 @@
+.wrapper {
+    position: absolute;
+    height: 500px;
+    width: 500px;
+    background-color: beige;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.center {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+#star {
+    color: red
+}
+
+.info {
+    margin-bottom: 10px;
+}
+
+.reg-button:hover {
+    background-color: rgb(29, 166, 204);
+
+}
+
+.reg-button {
+    box-shadow: 0 0 3px 0 black;
+    cursor: pointer
+}
