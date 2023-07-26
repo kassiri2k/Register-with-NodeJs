@@ -1,5 +1,13 @@
 [{
-    "email": "steve@home.org",
+    "email": "brucelee@gmail.org",
     "userHashPass": "'$2b$13$CW3SP.VCKI0NQFgu9plKQeXc3KugDB9hD/EB.nDgS79FQyxzBSDBW'",
     "_id": 1587912698986
+}, {
+    "email": "johnwick@random.com",
+    "userHashPass": "$2b$13$4PRXkAbHXcYtbqltiXdBveddhtNT3oZtPQl9kOLqkYUrU75AzWzwi",
+    "_id": 1690408788774
+}, {
+    "email": "lavie@gmail.com",
+    "userHashPass": "$2b$13$JF/iozAmf9M1lP.K/yXSvO9etVzPReByWp3sPGU.hpd6tWd1kCgXW",
+    "_id": 1690410165799
 }]

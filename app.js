@@ -4,14 +4,10 @@ const dotenv = require('dotenv').config();
 const expressLayouts = require('express-layouts')
 const bcrypt = require('bcrypt');
 const cors = require('cors');
-const {
-    readF,
-    writeF
-} = require('./model/data')
+const fs = require('fs/promises')
 
 
-// we just use an array as db 
-var users = readF('./model/data.json')
+
 
 const saltRound = 13 //The number of rounds determines the complexity of the hash
 const app = express();
@@ -34,25 +30,36 @@ app.get('/', (req, res) => {
 
 app.post('/register', async (req, res) => {
     let registerdUser = req.body;
-    let matched = users.find(user => user.email === registerdUser.email);
-    if (!matched) {
-        let hashPass = await bcrypt.hash(registerdUser.password, saltRound)
-        registerdUser = {
-            email: registerdUser.email,
-            userHashPass: hashPass,
-            _id: new Date.now()
-        }
-        users.push(registerdUser)
-        writeF('./model/data.json', JSON.stringify(users))
-    } else {
-        res.status(200)
-            .send({
-                error: {
-                    code: 400,
-                    message: "Email already used"
+    async function readm() {
+        await fs.readFile('./model/data.json', 'utf-8').then(async users => {
+            users = JSON.parse(users);
+            let matched = users.find(user => user.email === registerdUser.email);
+            if (!matched) {
+                let hashPass = await bcrypt.hash(registerdUser.password, saltRound)
+                registerdUser = {
+                    email: registerdUser.email,
+                    userHashPass: hashPass,
+                    _id: Date.now()
                 }
-            })
+                users.push(registerdUser)
+                fs.writeFile('./model/data.json', JSON.stringify(users))
+                console.log(`Full users ${users}`);
+                res.status(201).send({
+                    data: registerdUser
+                })
+            } else {
+                res.status(200)
+                    .send({
+                        error: {
+                            code: 400,
+                            message: "Email already used"
+                        }
+                    })
+            }
+        })
     }
+    readm()
+
 })
 
 app.listen(process.env.PORT, () => console.log(`Server is running at ${process.env.PORT}`))

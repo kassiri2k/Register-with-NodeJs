@@ -11,14 +11,15 @@ const failure = err => {
 }
 const sendData = (user, endpoint, callback) => {
     let url = `http://localhost:1111/${endpoint}`;
+    let h = new Headers();
+    h.append('Content-Type', 'application/json');
     let options = {
         method: 'POST',
-        headers: {
-            'content-Type': 'application/json'
-        },
+        headers: h,
         body: JSON.stringify(user)
     }
-    fetch(url, options)
+    let req = new Request(url, options)
+    fetch(req)
         .then(res => res.json())
         .then(content => {
             if ('error' in content) {
